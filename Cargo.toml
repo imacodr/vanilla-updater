@@ -1,9 +1,12 @@
 [package]
-name = "vanilla_updater"
+name = "vanilla_icecream"
 version = "0.1.0"
 edition = "2021"
+authors = ["Samuel P <me@imacodr.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 os_info = "3"
+colored = "2"
+home = "0.5.3"

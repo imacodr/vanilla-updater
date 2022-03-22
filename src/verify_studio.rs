@@ -52,10 +52,12 @@ fn check_os() -> std::string::String {
 }
 
 pub fn check_studio() {
-    let path = check_os();
-    let metadata = Path::new(&path).metadata().expect("failed");
+    let return_path = check_os();
+    let path = Path::new(&return_path);
 
-    match metadata.is_dir() {
+    println!("{}", path.is_dir());
+
+    match path.is_dir() {
         true => print!("yep its true"),
         false => print!("nope its false")
     }
@@ -65,7 +67,7 @@ pub fn check_studio() {
 
     let style_answer = prompt("What style do you want your Vanilla to be? (Colorful, Mono)");
     
-    write_vanilla(colors_answer, style_answer, path);
+    write_vanilla(colors_answer, style_answer, return_path);
 
     // let mut s = String::new();
 

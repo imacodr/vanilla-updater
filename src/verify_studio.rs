@@ -44,6 +44,7 @@ fn check_os() -> std::string::String {
                 }
                 None => println!("Impossible to get your home dir!"),
             };
+            println!("{}", path);
         }
         os_info::Type::Macos => {
             println!("{}", "Running macOS...".green().bold().italic());

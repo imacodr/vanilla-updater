@@ -19,7 +19,6 @@ fn main() {
 
 Loading Vanilla Icecream...
     "#;
-
     let print_to_text = format!("{}", icecream_text_art);
     println!("{}", print_to_text.bold().white());
     check_studio();

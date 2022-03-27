@@ -1,28 +1,66 @@
-name: "Release Artifacts"
+name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    tags: ["*"]
 
 jobs:
-  release:
-    name: release ${{ matrix.target }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - target: x86_64-pc-windows-gnu
-            archive: zip
-          - target: x86_64-unknown-linux-musl
-            archive: tar.gz tar.xz
-          - target: x86_64-apple-darwin
-            archive: zip
+  windows:
+    runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@latest
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+
+      - name: Build release binary
+        run: cargo build --verbose --locked --release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: icecream-win64
+          path: target/release/icecream.exe
+
+  macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+
+      - name: Install Rust
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+      - name: Build release binary
+        run: |
+          source $HOME/.cargo/env
+          cargo build --verbose --locked --release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUSTTARGET: ${{ matrix.target }}
-          ARCHIVE_TYPES: ${{ matrix.archive }}
+          OPENSSL_STATIC: 1
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: icecream-macos
+          path: target/release/icecream
+
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+
+      - name: Build
+        run: cargo build --locked --verbose --release
+        env:
+          OPENSSL_STATIC: 1
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: icecream-linux
+          path: target/release/icecream

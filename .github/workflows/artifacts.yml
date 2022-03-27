@@ -1,6 +1,8 @@
 name: Release
 
-on: [push]
+on:
+  push:
+    tags: ["*"]
 
 jobs:
   build:
@@ -18,14 +20,14 @@ jobs:
           override: true
 
       - name: Build
-        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_amd64
+        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_linux
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            target/release/vanilla_icecream_amd64
+            target/release/vanilla_icecream_linux
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -70,13 +72,13 @@ jobs:
           override: true
 
       - name: Build for mac
-        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_darwin
+        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_macos`
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            target/release/vanilla_icecream_darwin
+            target/release/vanilla_icecream_macos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

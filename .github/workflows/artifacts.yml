@@ -50,9 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files:
-            name: icecream-windows
-            path: target/release/vanilla_icecream.exe
+          files: target/release/vanilla_icecream.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -1,6 +1,7 @@
 [![Frame 594|690x215](./assets/banner.png)](https://github.com/imacodr/vanilla_icecream/releases)
 
 <div align="center">
+
 **Vanilla Icecream**
 
 Vanilla Icecream is a manager for the Vanilla icon pack by [@Elttob](https://github.com/Elttob).
@@ -8,6 +9,7 @@ Vanilla Icecream is a manager for the Vanilla icon pack by [@Elttob](https://git
 Its easy to use by only running the executable provided and saving your Vanilla settings.
 
 </hr>
+
 **Installation**
 
 1. Go to the [releases](https://github.com/imacodr/vanilla_icecream/releases) page and download the executable for your system.

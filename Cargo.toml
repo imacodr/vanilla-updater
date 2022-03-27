@@ -10,3 +10,5 @@ authors = ["Samuel P <me@imacodr.com>"]
 os_info = "3"
 colored = "2"
 home = "0.5.3"
+toml = "0.5.8"
+serde = "1.0.136"

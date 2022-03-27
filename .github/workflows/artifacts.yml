@@ -1,8 +1,6 @@
 name: Release
 
-on:
-  push:
-    tags: ["*"]
+on: [push]
 
 jobs:
   build:
@@ -72,7 +70,7 @@ jobs:
           override: true
 
       - name: Build for mac
-        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_macos`
+        run: cargo build --all --release && strip target/release/vanilla_icecream && mv target/release/vanilla_icecream target/release/vanilla_icecream_macos
 
       - name: Release
         uses: softprops/action-gh-release@v1

@@ -1,6 +1,7 @@
 [package]
 name = "vanilla_icecream"
 version = "0.1.0"
+description = "Vanilla IconPack manager for all platforms."
 edition = "2021"
 authors = ["Samuel P <me@imacodr.com>"]
 license = "MIT"

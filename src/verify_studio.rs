@@ -35,15 +35,37 @@ pub fn prompt(prompt: &str) -> std::string::String {
 fn check_os() -> std::string::String {
     let mut path = String::new();
     let info = os_info::get();
+    let mut os_times: Vec<std::time::SystemTime> = vec![];
     match info.os_type() {
         os_info::Type::Windows => {
             println!("{}", "Running Windows...".green().bold().italic());
+            // let mut os_times = [];
             match home::home_dir() {
                 Some(dir_path) => {
-                    path = format!("{}", dir_path.display());
+                    path = format!("{}\\AppData\\Local\\Roblox\\Versions", dir_path.display());
                 }
                 None => println!("Impossible to get your home dir!"),
             };
+            if let Ok(entries) = fs::read_dir(&path) {
+                for entry in entries {
+                    if let Ok(entry) = entry {
+                        // Here, `entry` is a `DirEntry`.
+                        if let Ok(metadata) = entry.metadata() {
+                            if let Ok(time) = metadata.modified() {
+                            } else {
+                                println!("Not supported on this platform");
+                            }
+                        } else {
+                            println!("Couldn't get metadata for {:?}", entry.path());
+                        }
+                    }
+                }
+            }
+            // let max = os_times
+            //     .iter()
+            //     .max_by_key(|x| x.elapsed().unwrap())
+            //     .unwrap();
+            // println!("{:?}", max);
             println!("{}", path);
         }
         os_info::Type::Macos => {
